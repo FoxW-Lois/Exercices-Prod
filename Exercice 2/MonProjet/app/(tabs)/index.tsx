@@ -1,47 +1,47 @@
-import { Image, StyleSheet, Platform } from 'react-native';
+import { Image, StyleSheet, View, Text, Button, FlatList } from 'react-native';
+import { useState } from 'react';
 
-import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 
 export default function HomeScreen() {
+	const [count, setCount] = useState(0);
+
+	const DATA = [
+		{ id: '1', title: 'Item1' },
+		{ id: '2', title: 'Item2' },
+		{ id: '3', title: 'Item3' },
+		{ id: '4', title: 'Item4' },
+		{ id: '5', title: 'Item5' }
+	];
+
 	return (
 		<ParallaxScrollView
 			headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-			headerImage={<Image source={require('@/assets/images/partial-react-logo.png')} style={styles.reactLogo} />}
+			headerImage={<Image source={require('@/assets/images/icon_carton.png')} style={styles.reactLogo} />}
 		>
 			<ThemedView style={styles.titleContainer}>
-				<ThemedText type="title">Welcome!</ThemedText>
-				<HelloWave />
-			</ThemedView>
-			<ThemedView style={styles.stepContainer}>
-				<ThemedText type="subtitle">Step 1: Try it</ThemedText>
-				<ThemedText>
-					Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes. Press{' '}
-					<ThemedText type="defaultSemiBold">
-						{Platform.select({
-							ios: 'cmd + d',
-							android: 'cmd + m',
-							web: 'F12'
-						})}
-					</ThemedText>{' '}
-					to open developer tools.
+				<ThemedText type="title" style={styles.titleText}>
+					Exercice 2
 				</ThemedText>
 			</ThemedView>
-			<ThemedView style={styles.stepContainer}>
-				<ThemedText type="subtitle">Step 2: Explore</ThemedText>
-				<ThemedText>Tap the Explore tab to learn more about what's included in this starter app.</ThemedText>
-			</ThemedView>
-			<ThemedView style={styles.stepContainer}>
-				<ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-				<ThemedText>
-					When you're ready, run <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get
-					a fresh <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-					<ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-					<ThemedText type="defaultSemiBold">app-example</ThemedText>.
-				</ThemedText>
-			</ThemedView>
+
+			<View style={styles.view}>
+				<Text>Compteur : {count}</Text>
+			</View>
+			<View style={styles.view}>
+				<Button title="+ 1" onPress={() => setCount(count + 1)} />
+				<Button title="+ 2" onPress={() => setCount(count + 2)} />
+				<Button title="Reset" onPress={() => setCount(0)} />
+			</View>
+
+			<FlatList
+				contentContainerStyle={styles.flatlist}
+				data={DATA}
+				keyExtractor={(item) => item.id}
+				renderItem={({ item }) => <Text>{item.title}</Text>}
+			/>
 		</ParallaxScrollView>
 	);
 }
@@ -50,6 +50,7 @@ const styles = StyleSheet.create({
 	titleContainer: {
 		flexDirection: 'row',
 		alignItems: 'center',
+		justifyContent: 'center',
 		gap: 8
 	},
 	stepContainer: {
@@ -62,5 +63,20 @@ const styles = StyleSheet.create({
 		bottom: 0,
 		left: 0,
 		position: 'absolute'
+	},
+	titleText: {
+		display: 'flex',
+		fontSize: 32
+	},
+	view: {
+		flexDirection: 'row',
+		alignItems: 'center',
+		justifyContent: 'center'
+	},
+	flatlist: {
+		display: 'flex',
+		flexDirection: 'column',
+		alignItems: 'center',
+		justifyContent: 'center'
 	}
 });
