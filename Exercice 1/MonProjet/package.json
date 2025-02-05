@@ -9,7 +9,8 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "test": "jest --watchAll",
-    "lint": "expo lint"
+    "lint": "expo lint",
+    "format": "prettier ./**/*.{js,ts,tsx,jsx} --write"
   },
   "jest": {
     "preset": "jest-expo"
@@ -18,6 +19,7 @@
     "@expo/vector-icons": "^14.0.2",
     "@react-navigation/bottom-tabs": "^7.2.0",
     "@react-navigation/native": "^7.0.14",
+    "@types/prettier": "^2.7.3",
     "expo": "~52.0.30",
     "expo-blur": "~14.0.3",
     "expo-constants": "~17.0.5",
@@ -30,6 +32,7 @@
     "expo-symbols": "~0.2.2",
     "expo-system-ui": "~4.0.7",
     "expo-web-browser": "~14.0.2",
+    "prettier": "^3.4.2",
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "react-native": "0.76.6",
@@ -50,5 +53,13 @@
     "react-test-renderer": "18.3.1",
     "typescript": "^5.3.3"
   },
-  "private": true
+  "private": true,
+  "prettier": {
+    "semi": true,
+    "trailingComma": "none",
+    "singleQuote": true,
+    "printWidth": 120,
+    "tabWidth": 4,
+    "useTabs": true
+  }
 }
