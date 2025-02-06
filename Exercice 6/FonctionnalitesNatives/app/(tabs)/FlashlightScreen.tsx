@@ -27,6 +27,7 @@ export default function FlashlightScreen() {
 		);
 	}
 
+	// Permet de changer entre la caméra face avant et face arrière
 	// function toggleCameraFacing() {
 	// 	setFacing((current) => (current === 'back' ? 'front' : 'back'));
 	// }
@@ -47,6 +48,7 @@ export default function FlashlightScreen() {
 			<View style={styles.container}>
 				<CameraView style={styles.camera} facing={facing} enableTorch={flashEnabled}>
 					<View style={styles.buttonContainer}>
+						{/* Permet de changer entre la caméra face avant et face arrière */}
 						{/* <TouchableOpacity style={styles.button} onPress={toggleCameraFacing}>
 							<Text style={styles.text}>Flip Camera</Text>
 						</TouchableOpacity> */}
@@ -55,6 +57,11 @@ export default function FlashlightScreen() {
 						</TouchableOpacity>
 					</View>
 				</CameraView>
+				{flashEnabled && (
+					<View style={styles.image}>
+						<Image source={require('@/assets/images/icon-torche.png')} />
+					</View>
+				)}
 			</View>
 		</ParallaxScrollView>
 	);
@@ -94,5 +101,11 @@ const styles = StyleSheet.create({
 		fontSize: 24,
 		fontWeight: 'bold',
 		color: 'white'
+	},
+	image: {
+		opacity: 0.5,
+		flex: 1,
+		alignItems: 'center',
+		justifyContent: 'center'
 	}
 });
