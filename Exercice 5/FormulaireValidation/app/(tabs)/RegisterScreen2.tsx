@@ -1,11 +1,4 @@
-import {
-	Image,
-	StyleSheet,
-	Text,
-	View,
-	TextInput,
-	Button
-} from 'react-native';
+import { Image, StyleSheet, Text, View, TextInput, Button } from 'react-native';
 
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
@@ -29,7 +22,9 @@ export default function RegisterScreen2() {
 					name: Yup.string().required('Nom requis'),
 					email: Yup.string().email('Email invalide').required('Email requis'),
 					password: Yup.string().min(6, '6 caractères minimum').required('Mot de passe requis'),
-					confirmpassword: Yup.string().min(6, '6 caractères minimum').required('Mot de passe de confirmation requis')
+					confirmpassword: Yup.string()
+						.min(6, '6 caractères minimum')
+						.required('Mot de passe de confirmation requis')
 				})}
 				onSubmit={(values) => console.log(values)}
 				validate={(values) => {
