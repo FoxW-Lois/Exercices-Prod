@@ -4,17 +4,12 @@ import {
 	Text,
 	View,
 	TextInput,
-	KeyboardAvoidingView,
-	Platform,
-	TouchableWithoutFeedback,
-	Keyboard,
 	Button
 } from 'react-native';
 
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
-import { useState } from 'react';
 import { Formik } from 'formik';
 import Yup from 'yup';
 

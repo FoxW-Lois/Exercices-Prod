@@ -9,7 +9,3 @@ export function CounterProvider({ children }: { children: React.ReactNode }) {
 export function useCounter() {
 	return useContext(CounterContext);
 }
-
-export function set10Count(count: number) {
-	return count = 10;
-}
