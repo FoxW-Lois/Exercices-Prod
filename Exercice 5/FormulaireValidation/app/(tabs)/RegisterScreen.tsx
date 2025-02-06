@@ -51,7 +51,8 @@ export default function RegisterScreen() {
 
 	const handleSubmit = () => {
 		if (name !== '' && email.includes('@') && password.length >= 6) {
-			setMsgValid('Toutes les données sont valide : ' + name + ' - ' + email + ' - ' + password);
+			setMsgValid('Toutes les données sont valides : ' + name + ' - ' + email + ' - ' + password);
+			alert(msgValid);
 		} else {
 			setMsgValid('');
 		}
@@ -114,7 +115,7 @@ export default function RegisterScreen() {
 					onPress={handleSubmit}
 					disabled={name === '' || !email.includes('@') || password.length < 6}
 				/>
-				{msgValid ? <Text style={styles.errortext}>{msgValid}</Text> : null}
+				{/* {msgValid ? <Text style={styles.errortext}>{msgValid}</Text> : null} */}
 			</View>
 		</ParallaxScrollView>
 	);
