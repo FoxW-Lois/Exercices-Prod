@@ -4,8 +4,6 @@ import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 
-let count = 0;
-
 export default function HomeScreen() {
 	return (
 		<ParallaxScrollView
