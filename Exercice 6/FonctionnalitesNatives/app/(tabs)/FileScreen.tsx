@@ -27,7 +27,7 @@ export default function FileScreen() {
 			headerImage={<Image source={require('@/assets/images/partial-react-logo.png')} style={styles.reactLogo} />}
 		>
 			<ThemedView style={styles.titleContainer}>
-				<ThemedText type="title">Welcome!</ThemedText>
+				<ThemedText type="title">Gestion de fichiers</ThemedText>
 			</ThemedView>
 
 			<View style={styles.view}>
