@@ -11,23 +11,25 @@ export default function HomeScreen() {
 	// const { 10Count, set10Count } = set10Count(count);
 
 	return (
-		<ParallaxScrollView
-			headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-			headerImage={<Image source={require('@/assets/images/partial-react-logo.png')} style={styles.reactLogo} />}
-		>
-			<ThemedView style={styles.titleContainer}>
-				<ThemedText type="title" style={styles.titleText}>
-					useContext
-				</ThemedText>
-			</ThemedView>
+		<CounterProvider>
+			<ParallaxScrollView
+				headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
+				headerImage={<Image source={require('@/assets/images/partial-react-logo.png')} style={styles.reactLogo} />}
+			>
+				<ThemedView style={styles.titleContainer}>
+					<ThemedText type="title" style={styles.titleText}>
+						useContext
+					</ThemedText>
+				</ThemedView>
 
-			<View style={styles.view}>
-				<CounterProvider><Text>Compteur : {count}</Text></CounterProvider>
-			</View>
-			<View style={styles.view}>
-				<CounterProvider><Button title="+10" onPress={() => setCount(count + 10)} /></CounterProvider>
-			</View>
-		</ParallaxScrollView>
+				<View style={styles.view}>
+					<Text>Compteur : {count}</Text>
+				</View>
+				<View style={styles.view}>
+					<Button title="+10" onPress={() => setCount(count + 10)} />
+				</View>
+			</ParallaxScrollView>
+		</CounterProvider>
 	);
 }
 
