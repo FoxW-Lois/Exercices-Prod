@@ -11,7 +11,7 @@ import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { Formik } from 'formik';
-import Yup from 'yup';
+import * as Yup from 'yup';
 
 export default function RegisterScreen2() {
 	return (
@@ -24,19 +24,28 @@ export default function RegisterScreen2() {
 			</ThemedView>
 
 			<Formik
-				initialValues={{ name: '', email: '', password: '' }}
+				initialValues={{ name: '', email: '', password: '', confirmpassword: '' }}
 				validationSchema={Yup.object({
 					name: Yup.string().required('Nom requis'),
 					email: Yup.string().email('Email invalide').required('Email requis'),
-					password: Yup.string().min(6, '6 caractères minimum').required('Mot de passe requis')
+					password: Yup.string().min(6, '6 caractères minimum').required('Mot de passe requis'),
+					confirmpassword: Yup.string().min(6, '6 caractères minimum').required('Mot de passe de confirmation requis')
 				})}
 				onSubmit={(values) => console.log(values)}
+				validate={(values) => {
+					const errors = {} as any;
+					if (values.password !== values.confirmpassword) {
+						errors.confirmpassword = 'Les mots de passe ne correspondent pas';
+					}
+					return errors;
+				}}
 			>
 				{({ handleChange, handleSubmit, values, errors }) => (
 					<View style={styles.view}>
 						<Text>Entrer le nom :</Text>
 						<TextInput
 							style={styles.textinput}
+							placeholder="Nom"
 							value={values.name}
 							onChangeText={handleChange('name')}
 						/>
@@ -45,6 +54,7 @@ export default function RegisterScreen2() {
 						<Text>Entrer l'email :</Text>
 						<TextInput
 							style={styles.textinput}
+							placeholder="Email"
 							value={values.email}
 							onChangeText={handleChange('email')}
 						/>
@@ -53,15 +63,24 @@ export default function RegisterScreen2() {
 						<Text>Entrer le mot de passe :</Text>
 						<TextInput
 							style={styles.textinput}
+							placeholder="Mot de passe"
 							value={values.password}
 							onChangeText={handleChange('password')}
 						/>
 						{errors.password ? <Text style={styles.errortext}>{errors.password}</Text> : null}
 
+						<Text>Confirmer le mot de passe :</Text>
+						<TextInput
+							style={styles.textinput}
+							placeholder="Confirmer le Mot de passe"
+							value={values.confirmpassword}
+							onChangeText={handleChange('confirmpassword')}
+						/>
+						{errors.confirmpassword ? <Text style={styles.errortext}>{errors.confirmpassword}</Text> : null}
+
 						<Button title="Valider" onPress={() => handleSubmit()} />
 					</View>
-				)
-				}
+				)}
 			</Formik>
 		</ParallaxScrollView>
 	);
