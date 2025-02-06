@@ -1,10 +1,26 @@
-import { Image, StyleSheet } from 'react-native';
+import { Image, StyleSheet, Text, TextInput, View, Button } from 'react-native';
+import * as FileSystem from 'expo-file-system';
+import { useState } from 'react';
 
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 
-export default function HomeScreen() {
+export default function FileScreen() {
+	const [content, setContent] = useState('');
+	const [text, setText] = useState('');
+
+	const saveFile = async () => {
+		const path = FileSystem.documentDirectory + 'test.txt';
+		await FileSystem.writeAsStringAsync(path, text, { encoding: FileSystem.EncodingType.UTF8 });
+	};
+
+	const readFile = async () => {
+		const path = FileSystem.documentDirectory + 'test.txt';
+		const fileContent = await FileSystem.readAsStringAsync(path, { encoding: FileSystem.EncodingType.UTF8 });
+		setContent(fileContent);
+	};
+
 	return (
 		<ParallaxScrollView
 			headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
@@ -13,6 +29,17 @@ export default function HomeScreen() {
 			<ThemedView style={styles.titleContainer}>
 				<ThemedText type="title">Welcome!</ThemedText>
 			</ThemedView>
+
+			<View style={styles.view}>
+				<Text>Entrer un texte :</Text>
+				<TextInput style={styles.textinput} placeholder="Texte à rentrer" value={text} onChangeText={setText} />
+			</View>
+
+			<View style={styles.view}>
+				<Button title="Sauvegarder" onPress={saveFile} />
+				<Button title="Lire" onPress={readFile} />
+				<Text>Contenu : {content}</Text>
+			</View>
 		</ParallaxScrollView>
 	);
 }
